@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PruebaNet.Utils.EntitiesTable
+namespace PruebaNet.Datos.EntitiesTable
 {
     public class Category
     {
-        public int idCategory { get; set; }
-        public int nameCategory { get; set; }
-        public int tax { get; set; }
+        public int Id { get; set; }
+        public int Name { get; set; }
+        public int Tax { get; set; }
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
     }
 }

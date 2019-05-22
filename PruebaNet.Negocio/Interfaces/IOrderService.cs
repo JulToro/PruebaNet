@@ -8,8 +8,10 @@
     public interface IOrderService
     {
         Task<Result<IEnumerable<Order>>> GetAll();
-        Task<Result<IEnumerable<Order>>> GetOrderbyClientId(Int64 clientId);
-        Task<Result<Order>> GetOrderbyId(Int64 orderId);
-        Task<Result<bool>> CreateOrder(Order order);
+        Task<Result<IEnumerable<Order>>> GetbyClientId(int clientId);
+        Task<Result<Order>> GetbyIdOrder(Int64 orderId);
+        Task<Result<bool>> Create(Order order);
+        Task<Result<bool>> Update(Order order);
+        Task<Result<bool>> Delete(Order order);
     }
 }

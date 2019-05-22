@@ -7,17 +7,13 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using PruebaNet.Datos.Adapters.Mappers;
-using PruebaNet.Datos.Adapters.Mappers.AutoMapper;
 
-namespace PruebaNet.WebApi
+namespace PruebaNet.WebApiv2
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var adapterFactory = new AutoMapperAdapterFactory();
-            MapperAdapterFactory.SetCurrent(adapterFactory);
             CreateWebHostBuilder(args).Build().Run();
         }
 

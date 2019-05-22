@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PruebaNet.Utils.EntitiesTable
+namespace PruebaNet.Datos.EntitiesTable
 {
-    class Client
+    public class Client
     {
+        public int Id { get; set; }
+        public int PersonId { get; set; }
+        public Person Person { get; set; }
     }
 }

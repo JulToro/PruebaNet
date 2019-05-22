@@ -18,14 +18,14 @@ namespace PruebaNet.WebApi.Controllers
     [EnableCors("MyPolicy")]
     public class ClientController : Controller
     {
-        private IServiceClients _iServiceClients;
+        private IOrderService _iOrderService;
         /// <summary>
         /// Constructor controller
         /// </summary>
-        /// <param name="iServiceClients"></param>
-        public ClientController(IServiceClients iServiceClients)
+        /// <param name="iOrderService"></param>
+        public ClientController(IOrderService iOrderService)
         {
-            this._iServiceClients = iServiceClients;
+            this._iOrderService = iOrderService;
         }
         /// <summary>
         /// Metodo encargado de obtener todas las ordenes que se han creado.
@@ -36,12 +36,12 @@ namespace PruebaNet.WebApi.Controllers
         [ProducesResponseType(typeof(Result<IEnumerable<Order>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Get()
+        public async Task<ActionResult> GetAll()
         {
             Result<IEnumerable<Order>> result = new Result<IEnumerable<Order>>();
             try
             {
-                result = await this._iServiceClients.GetAll();
+                result = await this._iOrderService.GetAll();
             }
             catch (Exception ex)
             {
@@ -49,7 +49,5 @@ namespace PruebaNet.WebApi.Controllers
             }
             return Ok(result);
         }
-
-
     }
 }

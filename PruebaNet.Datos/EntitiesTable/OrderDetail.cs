@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PruebaNet.Utils.EntitiesTable
+namespace PruebaNet.Datos.EntitiesTable
 {
-    class OrderDetail
+    public class OrderDetail
     {
+        public int Id { get; set; }
+        public string Commentary { get; set; }
+        public Product Product { get; set; }
+        public Order Order { get; set; }
+        
     }
 }

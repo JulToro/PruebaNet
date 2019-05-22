@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PruebaNet.Utils.Repositories;
+using PruebaNet.Datos.Context;
+using PruebaNet.Datos.Entities;
 using PruebaNet.Negocio.Interfaces;
 using PruebaNet.Negocio.Services;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
 namespace PruebaNet.WebApi
@@ -24,7 +26,7 @@ namespace PruebaNet.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
 
-            //services.Configure<StorageSettings>(Configuration);
+            services.Configure<StorageSettings>(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -47,7 +49,10 @@ namespace PruebaNet.WebApi
 
             services.AddTransient<IOrderService, OrderService>();
 
-            services.AddTransient<IOrderService, OrderServiceRepository>();
+            string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=BDPruebaNet;Trusted_Connection=True;";// Configuration["Storage:ConnectionString"];
+            services.AddDbContext<MyDbContext>(connection=> connection.UseSqlServer(connectionString));
+            
+            //services.AddTransient<IOrderService, OrderServiceRepository>();
 
         }
 

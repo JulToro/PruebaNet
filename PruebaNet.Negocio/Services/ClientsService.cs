@@ -1,6 +1,6 @@
 ﻿namespace PruebaNet.Negocio.Services
 {
-    public class ServiceClients
+    public class ClientsService
     {
     }
 }

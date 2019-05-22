@@ -1,15 +1,31 @@
-﻿using PruebaNet.Negocio.Entities;
+﻿using PruebaNet.Datos.Context;
+using PruebaNet.Negocio.Entities;
 using PruebaNet.Negocio.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using PruebaNet.Datos.Proyection;
 
-namespace PruebaNet.Utils.Repositories
+namespace PruebaNet.Datos.Repositories
 {
     public class OrderServiceRepository : IOrderService
     {
-        public Task<Result<bool>> CreateOrder(Order order)
+        //private readonly MyDbContext _context;
+
+        //public OrderServiceRepository(MyDbContext context) : base(context)
+        //{
+        //    _context = context;
+        //}
+
+        public Task<Result<bool>> Create(Order order)
+        {
+            var castOrder = order.ProjectedAs<EntitiesTable.Order>();
+           // _context.Order.Add()
+            throw new NotImplementedException();
+        }
+
+        public Task<Result<bool>> Delete(Order order)
         {
             throw new NotImplementedException();
         }
@@ -24,7 +40,12 @@ namespace PruebaNet.Utils.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Result<Order>> GetOrderbyId(long orderId)
+        public Task<Result<Order>> GetbyIdOrder(long orderId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Result<bool>> Update(Order order)
         {
             throw new NotImplementedException();
         }

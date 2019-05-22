@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PruebaNet.Utils.Entities
+﻿namespace PruebaNet.Datos.Entities
 {
     public class StorageSettings
     {
@@ -11,7 +7,7 @@ namespace PruebaNet.Utils.Entities
 
     public class Storage
     {
-        public string ConnectionString { get; set }
+        public string ConnectionString { get; set; }
     }
 
 }

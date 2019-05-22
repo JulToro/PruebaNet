@@ -3,17 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PruebaNet.WebApi", "PruebaNet.WebApi\PruebaNet.WebApi.csproj", "{C7B15D5D-19BC-4DA6-9FB8-0A33390E894E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{E74AE048-3779-4999-B9F5-0413C9FD5F69} = {E74AE048-3779-4999-B9F5-0413C9FD5F69}
-		{D4541A70-71B0-488C-AA65-CB92A263B79A} = {D4541A70-71B0-488C-AA65-CB92A263B79A}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PruebaNet.Negocio", "PruebaNet.Negocio\PruebaNet.Negocio.csproj", "{E74AE048-3779-4999-B9F5-0413C9FD5F69}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PruebaNet.Datos", "PruebaNet.Datos\PruebaNet.Datos.csproj", "{D4541A70-71B0-488C-AA65-CB92A263B79A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebaNet.Utils", "PruebaNet.Utils\PruebaNet.Utils.csproj", "{05FD0134-3016-4011-BBDF-4F37626CC142}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PruebaNet.Utils", "PruebaNet.Utils\PruebaNet.Utils.csproj", "{05FD0134-3016-4011-BBDF-4F37626CC142}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PruebaNet.WebApi", "PruebaNet.WebApi\PruebaNet.WebApi.csproj", "{0A9A012A-DC6B-4C20-8CB4-86A4FE3D6A00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C7B15D5D-19BC-4DA6-9FB8-0A33390E894E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7B15D5D-19BC-4DA6-9FB8-0A33390E894E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7B15D5D-19BC-4DA6-9FB8-0A33390E894E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7B15D5D-19BC-4DA6-9FB8-0A33390E894E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E74AE048-3779-4999-B9F5-0413C9FD5F69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E74AE048-3779-4999-B9F5-0413C9FD5F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E74AE048-3779-4999-B9F5-0413C9FD5F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -37,6 +29,10 @@ Global
 		{05FD0134-3016-4011-BBDF-4F37626CC142}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05FD0134-3016-4011-BBDF-4F37626CC142}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05FD0134-3016-4011-BBDF-4F37626CC142}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A9A012A-DC6B-4C20-8CB4-86A4FE3D6A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A9A012A-DC6B-4C20-8CB4-86A4FE3D6A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A9A012A-DC6B-4C20-8CB4-86A4FE3D6A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A9A012A-DC6B-4C20-8CB4-86A4FE3D6A00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

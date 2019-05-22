@@ -14,20 +14,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="AutoMapper" Version="8.1.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client.es" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.11" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PruebaNet.Datos\PruebaNet.Datos.csproj" />
     <ProjectReference Include="..\PruebaNet.Negocio\PruebaNet.Negocio.csproj" />
-    <ProjectReference Include="..\PruebaNet.Utils\PruebaNet.Utils.csproj" />
   </ItemGroup>
 
   <ItemGroup>
