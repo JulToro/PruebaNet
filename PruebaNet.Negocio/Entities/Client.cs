@@ -7,15 +7,10 @@
     public class Client: IEntity
     {
         public Int64 identification { get; }
-        [DataMember]
         public string name { get; }
-        [DataMember]
         public string email { get; }
-        [DataMember]
         public string phoneNumber { get; }
-        [DataMember]
         public string addres { get; }
-        [DataMember]
         public string city { get; }
         
         public Client(Int64 identification, string name, string email, string  phoneNumber, string addres, string city)
