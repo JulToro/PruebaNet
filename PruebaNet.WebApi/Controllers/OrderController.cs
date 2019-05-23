@@ -50,6 +50,11 @@ namespace PruebaNet.WebApi.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Obtener una orden especifica
+        /// </summary>
+        /// <param name="OrderId"></param>
+        /// <returns></returns>
         // GET: api/[controller]
         [HttpGet("{Order/{OrderId}")]
         [ProducesResponseType(typeof(Result<IEnumerable<Order>>), StatusCodes.Status200OK)]
@@ -68,50 +73,7 @@ namespace PruebaNet.WebApi.Controllers
             }
             return Ok(result);
         }
-
-        //// GET: api/[controller]
-        //[HttpGet("{Order/Client")]
-        //[ProducesResponseType(typeof(Result<IEnumerable<Order>>), StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //[ProducesResponseType(400)]
-        //public async Task<ActionResult> Get(int OrderId)
-        //{
-        //    Result<IEnumerable<Order>> result = new Result<IEnumerable<Order>>();
-        //    try
-        //    {
-        //        result = await this._iOrderService.GetAll();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return NotFound(ex.Message);
-        //    }
-        //    return Ok(result);
-        //}
-
-        /// <summary>
-        /// Obtiene la orden 
-        /// </summary>
-        /// <param name="Id">Id de la orden</param>
-        /// <returns></returns>
-        // GET: api/[controller]
-        [HttpGet("{Id}")]
-        [ProducesResponseType(typeof(Result<IEnumerable<Order>>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(400)]
-        public async Task<ActionResult> GetbyOrderId(int Id)
-        {
-            Result<IEnumerable<Order>> result = new Result<IEnumerable<Order>>();
-            try
-            {
-                result = await this._iOrderService.GetAll();
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
-            return Ok(result);
-        }
-
+        
         /// <summary>
         /// Registrar Orden
         /// </summary>

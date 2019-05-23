@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PruebaNet.Negocio.Interfaces
 {
-    public interface IServiceClients
+    public interface IClientsServices
     {
         Task<Result<IEnumerable<Client>>> GetAll();
         Task<Result<IEnumerable<Client>>> GetClient(int clientId);

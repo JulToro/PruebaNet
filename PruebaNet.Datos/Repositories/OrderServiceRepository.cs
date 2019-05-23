@@ -49,5 +49,10 @@ namespace PruebaNet.Datos.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public Task<Result<IEnumerable<Order>>> GetbyClientId(int clientId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

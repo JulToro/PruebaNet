@@ -7,9 +7,9 @@
 
     public class OrderService : IOrderService
     {
-        public async Task<Result<bool>> Create(Order order)
+        public Task<Result<bool>> Create(Order order)
         {
-            return await this.Create(order);
+            throw new System.NotImplementedException();
         }
 
         public Task<Result<bool>> Delete(Order order)
@@ -17,17 +17,19 @@
             throw new System.NotImplementedException();
         }
 
-        public async Task<Result<IEnumerable<Order>>> GetAll()
+        public Task<Result<IEnumerable<Order>>> GetAll()
         {
-            return await this.GetAll();
+            throw new System.NotImplementedException();
         }
-        public async Task<Result<IEnumerable<Order>>> GetOrderbyClientId(long clientId)
+
+        public Task<Result<IEnumerable<Order>>> GetbyClientId(int clientId)
         {
-            return await this.GetOrderbyClientId(clientId);
+            throw new System.NotImplementedException();
         }
-        public async Task<Result<Order>> GetbyIdOrder(long orderId)
+
+        public Task<Result<Order>> GetbyIdOrder(long orderId)
         {
-            return await this.GetbyIdOrder(orderId);
+            throw new System.NotImplementedException();
         }
 
         public Task<Result<bool>> Update(Order order)

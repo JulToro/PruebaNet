@@ -18,12 +18,12 @@ namespace PruebaNet.WebApi.Controllers
     [EnableCors("MyPolicy")]
     public class ClientController : Controller
     {
-        private IServiceClients _iServiceClients;
+        private IClientsServices _iServiceClients;
         /// <summary>
         /// Constructor controller
         /// </summary>
         /// <param name="iServiceClients"></param>
-        public ClientController(IServiceClients iServiceClients)
+        public ClientController(IClientsServices iServiceClients)
         {
             this._iServiceClients = iServiceClients;
         }
@@ -38,18 +38,62 @@ namespace PruebaNet.WebApi.Controllers
         [ProducesResponseType(400)]
         public async Task<ActionResult> Get()
         {
-            Result<IEnumerable<Order>> result = new Result<IEnumerable<Order>>();
+            Result<IEnumerable<Client>> result = new Result<IEnumerable<Client>>();
             try
             {
                 result = await this._iServiceClients.GetAll();
             }
             catch (Exception ex)
             {
-                return NotFound();
+                return NotFound($"Ocorrudio un error inexperado información del error: {ex.Message}");
             }
             return Ok(result);
         }
-
+        /// <summary>
+        /// Metodo encargado de obtener información de un cliente especifico.
+        /// </summary>
+        /// <returns></returns>
+        // GET: api/FuelPerformance
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Result<IEnumerable<Order>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult> Get(int id)
+        {
+            Result<IEnumerable<Client>> result = new Result<IEnumerable<Client>>();
+            try
+            {
+                result = await this._iServiceClients.GetAll();
+            }
+            catch (Exception ex)
+            {
+                return NotFound($"Ocorrudio un error inexperado información del error: {ex.Message}");
+            }
+            return Ok(result);
+        }
+        /// <summary>
+        /// Registrar Orden
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        // POST: api/[controller]
+        [HttpPost()]
+        [ProducesResponseType(typeof(Result<IEnumerable<Order>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult> Post(Client client)
+        {
+            Result<IEnumerable<bool>> result = new Result<IEnumerable<bool>>();
+            try
+            {
+               // result = await this._iOrderService.GetAll();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+            return Ok(result);
+        }
 
     }
 }
