@@ -61,7 +61,7 @@ namespace PruebaNet.WebApi.Controllers
         /// <param name="id">Id del producto</param>
         /// <returns></returns>
         // GET: api/products
-        [HttpGet()]
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(Result<Product>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(400)]

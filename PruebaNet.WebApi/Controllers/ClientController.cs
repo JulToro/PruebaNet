@@ -88,6 +88,7 @@ namespace PruebaNet.WebApi.Controllers
         /// <returns></returns>
         // POST: api/clients
         [HttpPost()]
+        [Consumes("application/json")]
         [ProducesResponseType(typeof(Result<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(400)]

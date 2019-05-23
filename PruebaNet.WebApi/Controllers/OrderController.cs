@@ -37,7 +37,7 @@ namespace PruebaNet.WebApi.Controllers
         [ProducesResponseType(typeof(Result<IEnumerable<Order>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Get()
+        public async Task<ActionResult> Get([FromQuery] int? clientId, [FromQuery] int? employeeId)
         {
             Result<IEnumerable<Order>> result = new Result<IEnumerable<Order>>();
             try
@@ -87,10 +87,11 @@ namespace PruebaNet.WebApi.Controllers
         /// <returns></returns>
         // POST: api/orders
         [HttpPost()]
+        [Consumes("application/json")]
         [ProducesResponseType(typeof(Result<IEnumerable<Order>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Post(Order order)
+        public async Task<ActionResult> Post([FromBody]Order order)
         {
             Result<bool> result = new Result<bool>();
             try
