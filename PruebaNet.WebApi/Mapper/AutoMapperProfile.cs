@@ -3,11 +3,12 @@ using PruebaNet.Datos.DTO;
 using PruebaNet.Negocio.Entities;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace PruebaNet.Datos.Adapters.Mapper.Mapeando
+namespace PruebaNet.WebApi.Mapper
 {
-    public class AutoMapperProfile : Profile
+    public class AutoMapperProfile: Profile
     {
         public AutoMapperProfile()
         {

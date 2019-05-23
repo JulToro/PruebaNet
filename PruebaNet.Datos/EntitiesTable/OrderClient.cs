@@ -1,14 +1,15 @@
-﻿using System;
+﻿using PruebaNet.Datos.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace PruebaNet.Datos.EntitiesTable
 {
-    public class OrderClient
+    public class OrderClient: BaseEntity
     {
-        public int Id { get; set; }
-        public Client Client { get; set; }        
-        public Employee Employee { get;set; }
-        public ICollection<Order> Orders { get; set; }
+        public virtual Client Client { get; set; }
+        public virtual Employee Employee { get;set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        
     }
 }

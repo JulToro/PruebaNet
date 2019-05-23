@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
 using PruebaNet.Negocio.Services.InterfaceServices;
+using PruebaNet.Datos.Base;
+using PruebaNet.Datos.Repositories;
 
 namespace PruebaNet.WebApi
 {
@@ -55,8 +57,11 @@ namespace PruebaNet.WebApi
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IProductsService, ProductsServices>();
 
-            string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=BDPruebaNet;Trusted_Connection=True;";// Configuration["Storage:ConnectionString"];
+            //Repositories
+            services.AddTransient<IClient, ClientsRepository>();
+
             //services.AddDbContext<MyDbContext>(connection=> connection.UseSqlServer(connectionString), b => b.MigrationsAssembly("Project.Api"));
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddDbContext<MyDbContext>(options => options.UseSqlServer(Configuration["Storage:ConnectionString"], b => b.MigrationsAssembly("PruebaNet.WebApi")));
 
             //services.AddTransient<IOrderService, OrderServiceRepository>();

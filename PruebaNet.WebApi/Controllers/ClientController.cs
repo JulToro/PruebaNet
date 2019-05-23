@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PruebaNet.Datos.DTO;
 using PruebaNet.Negocio.Entities;
 using PruebaNet.Negocio.Services.InterfaceServices;
 
@@ -92,12 +93,14 @@ namespace PruebaNet.WebApi.Controllers
         [ProducesResponseType(typeof(Result<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Post([FromBody]Client client)
+        public async Task<ActionResult> Post([FromBody]ClientDTO client)
         {
+            Client newClient = new Client(client.identification,client.name,client.email,client.phoneNumber,client.addres,client.city);
+
             Result<bool> result = new Result<bool>();
             try
             {
-                result = await this._iServiceClients.Create(client);
+                result = await this._iServiceClients.Create(newClient);
                 if (!result.IsSuccess)
                 {
                     return NotFound(result.Exception);
