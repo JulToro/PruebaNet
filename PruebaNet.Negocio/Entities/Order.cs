@@ -37,6 +37,9 @@
             return true;
         }
 
-
+        public double Get()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

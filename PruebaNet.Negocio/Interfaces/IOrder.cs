@@ -2,8 +2,8 @@
 
 namespace PruebaNet.Negocio.Interfaces
 {
-    public interface IOrder: IEntity
+    public interface IOrder
     {
-        Double GetTotalOrder();
+        Double Get();
     }
 }

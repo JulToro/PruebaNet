@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PruebaNet.Negocio.Interfaces
 {
-    public interface IEmployeesService
+    public interface IEmployee
     {
         Task<Result<IEnumerable<Employee>>> Get();
         Task<Result<Employee>> Get(int employeeId);

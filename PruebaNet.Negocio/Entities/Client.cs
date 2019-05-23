@@ -27,7 +27,7 @@
             {
                 throw new Exception("The client doesn't have identification");
             }
-            if (this._identification == 0)
+            if (String.IsNullOrEmpty(this._name))
             {
                 throw new Exception("The client doesn't have name");
             }

@@ -81,12 +81,12 @@ namespace PruebaNet.WebApi.Controllers
         [ProducesResponseType(typeof(Result<IEnumerable<Order>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Post(Client client)
+        public async Task<ActionResult> Post([FromBody]Client client)
         {
-            Result<IEnumerable<bool>> result = new Result<IEnumerable<bool>>();
+            Result<bool> result = new Result<bool>();
             try
             {
-               // result = await this._iOrderService.GetAll();
+                result = await this._iServiceClients.Create(client);
             }
             catch (Exception ex)
             {
