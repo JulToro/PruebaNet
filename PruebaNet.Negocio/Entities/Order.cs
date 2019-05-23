@@ -6,31 +6,31 @@
     using System.Linq;
     public class Order : IOrder
     {
-        public Int64 _clientId { get; }
-        public Int64 _employeeId { get; }
-        public List<Product> _products { get; }
-        public string _commentary { get; }
+        public Int64 clientId { get; }
+        public Int64 employeeId { get; }
+        public List<Product> products { get; }
+        public string commentary { get; }
 
         public Order(Int64 clientId, Int64 employeeId, List<Product> listProducts, string commentary)
         {
-            this._clientId = clientId;
-            this._employeeId = employeeId;
-            this._products = listProducts;
-            this._commentary = commentary;            
+            this.clientId = clientId;
+            this.employeeId = employeeId;
+            this.products = listProducts;
+            this.commentary = commentary;            
         }
 
         public Double GetTotalOrder()
         {
-            return _products.Sum(q=>q._value);
+            return products.Sum(q=>q.value);
         }
 
         public bool Validate()
         {            
-            if (this._clientId == 0)
+            if (this.clientId == 0)
             {
                 throw new Exception("The client doesn't exist for the Order");
             }
-            if (this._products.Count==0)
+            if (this.products.Count==0)
             {
                 throw new Exception("The order doesn't contain products");
             }

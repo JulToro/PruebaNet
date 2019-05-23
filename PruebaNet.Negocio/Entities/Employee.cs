@@ -6,7 +6,7 @@ namespace PruebaNet.Negocio.Entities
 {
     public class Employee
     {
-        public Int64 _identification { get; }
-        public string _name { get; }
+        public Int64 identification { get; }
+        public string name { get; }
     }
 }

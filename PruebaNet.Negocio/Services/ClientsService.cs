@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PruebaNet.Negocio.Entities;
-using PruebaNet.Negocio.Interfaces;
+using PruebaNet.Negocio.Services.InterfaceServices;
 
 namespace PruebaNet.Negocio.Services
 {

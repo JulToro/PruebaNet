@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PruebaNet.Negocio.Entities;
-using PruebaNet.Negocio.Interfaces;
+using PruebaNet.Negocio.Services.InterfaceServices;
 
 namespace PruebaNet.WebApi.Controllers
 {
@@ -14,7 +14,7 @@ namespace PruebaNet.WebApi.Controllers
     /// Class Order 
     /// </summary>
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/clients")]
     [EnableCors("MyPolicy")]
     public class ClientController : Controller
     {
@@ -31,54 +31,64 @@ namespace PruebaNet.WebApi.Controllers
         /// Metodo encargado de obtener todas las ordenes que se han creado.
         /// </summary>
         /// <returns></returns>
-        // GET: api/FuelPerformance
+        // GET: api/clients
         [HttpGet()]
-        [ProducesResponseType(typeof(Result<IEnumerable<Order>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Result<IEnumerable<Client>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(400)]
         public async Task<ActionResult> Get()
         {
             Result<IEnumerable<Client>> result = new Result<IEnumerable<Client>>();
             try
-            {
+            {               
                 result = await this._iServiceClients.GetAll();
+                if (!result.IsSuccess)
+                {
+                    return NotFound(result.Exception);
+                }
             }
             catch (Exception ex)
             {
-                return NotFound($"Ocorrudio un error inexperado información del error: {ex.Message}");
+                return BadRequest($"Ocorrudio un error inexperado información del error: {ex.Message}");
             }
             return Ok(result);
         }
+
         /// <summary>
         /// Metodo encargado de obtener información de un cliente especifico.
         /// </summary>
+        /// <param name="id">Id del Cliente</param>
         /// <returns></returns>
-        // GET: api/FuelPerformance
+        // GET: api/clients
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(Result<IEnumerable<Order>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Result<Client>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(400)]
         public async Task<ActionResult> Get(int id)
         {
-            Result<IEnumerable<Client>> result = new Result<IEnumerable<Client>>();
+            Result<Client> result = new Result<Client>();
             try
             {
-                result = await this._iServiceClients.GetAll();
+                result = await this._iServiceClients.GetClient(id);
+                if (!result.IsSuccess)
+                {
+                    return NotFound(result.Exception);
+                }
             }
             catch (Exception ex)
             {
-                return NotFound($"Ocorrudio un error inexperado información del error: {ex.Message}");
+                return BadRequest($"Ocorrudio un error inexperado información del error: {ex.Message}");
             }
             return Ok(result);
         }
         /// <summary>
-        /// Registrar Orden
+        /// Registrar Cliente
         /// </summary>
         /// <param name="client"></param>
         /// <returns></returns>
-        // POST: api/[controller]
+        // POST: api/clients
         [HttpPost()]
-        [ProducesResponseType(typeof(Result<IEnumerable<Order>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Result<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(400)]
         public async Task<ActionResult> Post([FromBody]Client client)
@@ -87,10 +97,14 @@ namespace PruebaNet.WebApi.Controllers
             try
             {
                 result = await this._iServiceClients.Create(client);
+                if (!result.IsSuccess)
+                {
+                    return NotFound(result.Exception);
+                }
             }
             catch (Exception ex)
             {
-                return NotFound(ex.Message);
+                return BadRequest($"Ocorrudio un error inexperado información del error: {ex.Message}");
             }
             return Ok(result);
         }

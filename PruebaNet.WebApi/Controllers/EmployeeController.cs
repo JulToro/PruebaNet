@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PruebaNet.Negocio.Entities;
-using PruebaNet.Negocio.Interfaces;
+using PruebaNet.Negocio.Services.InterfaceServices;
 
 namespace PruebaNet.WebApi.Controllers
 {
     /// <summary>
     /// Controlador encargado de Empleados
     /// </summary>
+    [Produces("application/json")]
+    [Route("api/employees")]
+    [EnableCors("MyPolicy")]
     public class EmployeeController : Controller
     {
         private IEmployeesService _iEmployeesService;
@@ -27,7 +31,7 @@ namespace PruebaNet.WebApi.Controllers
         /// Metodo encargado de obtener todas las ordenes que se han creado.
         /// </summary>
         /// <returns></returns>
-        // GET: api/FuelPerformance
+        // GET: api/employees
         [HttpGet()]
         [ProducesResponseType(typeof(Result<IEnumerable<Employee>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -37,11 +41,15 @@ namespace PruebaNet.WebApi.Controllers
             Result<IEnumerable<Employee>> result = new Result<IEnumerable<Employee>>();
             try
             {
-               
+                result = await _iEmployeesService.Get();
+                if (!result.IsSuccess)
+                {
+                    return NotFound(result.Exception);
+                }
             }
             catch (Exception ex)
             {
-                return NotFound($"Ocorrudio un error inexperado información del error: {ex.Message}");
+                return BadRequest($"Ocorrudio un error inexperado información del error: {ex.Message}");
             }
             return Ok(result);
         }
@@ -49,44 +57,26 @@ namespace PruebaNet.WebApi.Controllers
         /// Metodo encargado de obtener información de un cliente especifico.
         /// </summary>
         /// <returns></returns>
-        // GET: api/FuelPerformance
+        /// <param name="id">Id del Empleado</param>
+        // GET: api/employees
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(Result<IEnumerable<Employee>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Result<Employee>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(400)]
         public async Task<ActionResult> Get(int id)
         {
-            Result<IEnumerable<Employee>> result = new Result<IEnumerable<Employee>>();
+            Result<Employee> result = new Result<Employee>();
             try
             {
-                //result = await this._iServiceClients.GetAll();
+                result = await this._iEmployeesService.Get(id);
+                if (!result.IsSuccess)
+                {
+                    return NotFound(result.Exception);
+                }
             }
             catch (Exception ex)
             {
-                return NotFound($"Ocorrudio un error inexperado información del error: {ex.Message}");
-            }
-            return Ok(result);
-        }
-        /// <summary>
-        /// Registrar Orden
-        /// </summary>
-        /// <param name="employee"></param>
-        /// <returns></returns>
-        // POST: api/[controller]
-        [HttpPost()]
-        [ProducesResponseType(typeof(Result<IEnumerable<Employee>>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(400)]
-        public async Task<ActionResult> Post(Employee employee)
-        {
-            Result<IEnumerable<bool>> result = new Result<IEnumerable<bool>>();
-            try
-            {
-                // result = await this._iOrderService.GetAll();
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
+                return BadRequest($"Ocorrudio un error inexperado información del error: {ex.Message}");
             }
             return Ok(result);
         }

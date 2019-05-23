@@ -1,7 +1,7 @@
 ﻿namespace PruebaNet.Negocio.Services
 {
     using PruebaNet.Negocio.Entities;
-    using PruebaNet.Negocio.Interfaces;
+    using PruebaNet.Negocio.Services.InterfaceServices;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 

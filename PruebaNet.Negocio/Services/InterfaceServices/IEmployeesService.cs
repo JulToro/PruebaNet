@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PruebaNet.Negocio.Interfaces
+namespace PruebaNet.Negocio.Services.InterfaceServices
 {
     public interface IEmployeesService
     {

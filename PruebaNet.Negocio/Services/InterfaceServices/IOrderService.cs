@@ -1,4 +1,4 @@
-﻿namespace PruebaNet.Negocio.Interfaces
+﻿namespace PruebaNet.Negocio.Services.InterfaceServices
 {
     using PruebaNet.Negocio.Entities;
     using System;

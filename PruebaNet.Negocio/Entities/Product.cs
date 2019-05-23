@@ -4,36 +4,35 @@
     using System;
     public class Product: IEntity
     {
-        public Int64 _idProduct { get; }
-        public string _nameProduct { get; }
-        public double _value { get; }
-        public int? _PLU { get; }
-        public int _tax { get; }        
-
+        public Int64 idProduct { get; }
+        public string nameProduct { get; }
+        public double value { get; }
+        public int? PLU { get; }
+        public int tax { get; }
+        public string commentary { get; }
         public Product(Int64 idProduct, string nameProduct, double value, int tax, int? PLU)
         {
-            this._idProduct = idProduct;
-            this._nameProduct = nameProduct;
-            this._value = value;
-            this._tax = tax;
-            this._PLU = PLU;
+            this.idProduct = idProduct;
+            this.nameProduct = nameProduct;
+            this.value = value;
+            this.tax = tax;
+            this.PLU = PLU;
         }        
         
         public bool Validate()
         {
-            if(this._idProduct == 0)
+            if(this.idProduct == 0)
             {
                 throw new Exception("The product doesn't have identification");
             }
-            if (string.IsNullOrEmpty(this._nameProduct))
+            if (string.IsNullOrEmpty(this.nameProduct))
             {
                 throw new Exception("The product doesn't have name");
             }
-            if (this._value == 0)
+            if (this.value == 0)
             {
                 throw new Exception("The product doesn't have value");
             }
-
             return true;
         }
     }

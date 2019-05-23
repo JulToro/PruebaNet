@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PruebaNet.Negocio.Entities;
-using PruebaNet.Negocio.Interfaces;
+using PruebaNet.Negocio.Services.InterfaceServices;
 
 namespace PruebaNet.WebApi.Controllers
 {
@@ -14,7 +14,7 @@ namespace PruebaNet.WebApi.Controllers
     /// Class Order Controller
     /// </summary>
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/orders")]
     [EnableCors("MyPolicy")]
     public class OrderController : Controller
     {
@@ -32,7 +32,7 @@ namespace PruebaNet.WebApi.Controllers
         /// Metodo encargado de obtener todas las ordenes que se han creado.
         /// </summary>
         /// <returns></returns>
-        // GET: api/[controller]
+        // GET: api/orders
         [HttpGet()]
         [ProducesResponseType(typeof(Result<IEnumerable<Order>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -43,9 +43,11 @@ namespace PruebaNet.WebApi.Controllers
             try
             {
                 result = await this._iOrderService.GetAll();
-            } catch(Exception ex)
+
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest($"Ocurrio un error inexperado información del error: {ex.Message}");
             }            
             return Ok(result);
         }
@@ -53,47 +55,55 @@ namespace PruebaNet.WebApi.Controllers
         /// <summary>
         /// Obtener una orden especifica
         /// </summary>
-        /// <param name="OrderId"></param>
+        /// <param name="id">Id de la orden</param>
         /// <returns></returns>
-        // GET: api/[controller]
-        [HttpGet("{Order/{OrderId}")]
+        // GET: api/orders
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(Result<IEnumerable<Order>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Get(int OrderId)
+        public async Task<ActionResult> Get(int id)
         {
-            Result<IEnumerable<Order>> result = new Result<IEnumerable<Order>>();
+            Result<Order> result = new Result<Order>();
             try
             {
-                result = await this._iOrderService.GetAll();
+                result = await this._iOrderService.GetbyIdOrder(id);
+                if (!result.IsSuccess)
+                {
+                    return NotFound(result.Exception);
+                }
             }
             catch (Exception ex)
             {
-                return NotFound(ex.Message);
+                return BadRequest($"Ocurrio un error inexperado información del error: {ex.Message}");
             }
             return Ok(result);
         }
-        
+
         /// <summary>
         /// Registrar Orden
         /// </summary>
-        /// <param name="order"></param>
+        /// <param name="order">Orden a registrar</param>
         /// <returns></returns>
-        // POST: api/[controller]
+        // POST: api/orders
         [HttpPost()]
         [ProducesResponseType(typeof(Result<IEnumerable<Order>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(400)]
         public async Task<ActionResult> Post(Order order)
         {
-            Result<IEnumerable<Order>> result = new Result<IEnumerable<Order>>();
+            Result<bool> result = new Result<bool>();
             try
             {
-                result = await this._iOrderService.GetAll();
+                result = await this._iOrderService.Create(order);
+                if (!result.IsSuccess)
+                {
+                    return NotFound(result.Exception);
+                }
             }
             catch (Exception ex)
             {
-                return NotFound(ex.Message);
+                return BadRequest($"Ocurrio un error inexperado información del error: {ex.Message}");
             }
             return Ok(result);
         }
