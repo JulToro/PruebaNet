@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PruebaNet.Datos.Migrations
+namespace PruebaNet.WebApi.Migrations
 {
     public partial class InitialCreate : Migration
     {
@@ -147,6 +147,25 @@ namespace PruebaNet.Datos.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PLU",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CategoryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PLU", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PLU_Category_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Category",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Order",
                 columns: table => new
                 {
@@ -239,13 +258,15 @@ namespace PruebaNet.Datos.Migrations
                 name: "IX_OrderDetail_ProductId",
                 table: "OrderDetail",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PLU_CategoryId",
+                table: "PLU",
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Category");
-
             migrationBuilder.DropTable(
                 name: "Inventory");
 
@@ -253,13 +274,19 @@ namespace PruebaNet.Datos.Migrations
                 name: "OrderDetail");
 
             migrationBuilder.DropTable(
+                name: "PLU");
+
+            migrationBuilder.DropTable(
                 name: "Order");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "Category");
 
             migrationBuilder.DropTable(
                 name: "OrderClient");
+
+            migrationBuilder.DropTable(
+                name: "Product");
 
             migrationBuilder.DropTable(
                 name: "Client");

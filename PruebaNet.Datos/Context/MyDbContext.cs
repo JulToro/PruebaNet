@@ -11,7 +11,6 @@ namespace PruebaNet.Datos.Context
 {
     public class MyDbContext: DbContext
     {
-        public string Connection { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options):base(options)
         {  } 
 
@@ -24,5 +23,6 @@ namespace PruebaNet.Datos.Context
         public DbSet<OrderDetail> OrderDetail { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Category> Category { get; set; }
+        public DbSet<PLU> PLU { get; set; }
     }
 }

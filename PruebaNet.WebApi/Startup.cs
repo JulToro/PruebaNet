@@ -11,6 +11,8 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
+using PruebaNet.Negocio.Services.InterfaceServices;
+
 namespace PruebaNet.WebApi
 {
     public class Startup
@@ -47,15 +49,20 @@ namespace PruebaNet.WebApi
             });
             services.AddMvcCore().AddJsonFormatters();
 
+            //Services 
+            services.AddTransient<IClientsServices, ClientsService>();
+            services.AddTransient<IEmployeesService, EmployeeService>();
             services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IProductsService, ProductsServices>();
 
             string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=BDPruebaNet;Trusted_Connection=True;";// Configuration["Storage:ConnectionString"];
-            services.AddDbContext<MyDbContext>(connection=> connection.UseSqlServer(connectionString));
-            
+            //services.AddDbContext<MyDbContext>(connection=> connection.UseSqlServer(connectionString), b => b.MigrationsAssembly("Project.Api"));
+            services.AddDbContext<MyDbContext>(options => options.UseSqlServer(Configuration["Storage:ConnectionString"], b => b.MigrationsAssembly("PruebaNet.WebApi")));
+
             //services.AddTransient<IOrderService, OrderServiceRepository>();
 
         }
-
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {

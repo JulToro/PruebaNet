@@ -9,7 +9,7 @@ using PruebaNet.Datos.Proyection;
 
 namespace PruebaNet.Datos.Repositories
 {
-    public class OrderServiceRepository : IOrderService
+    public class OrderServiceRepository 
     {
         //private readonly MyDbContext _context;
 

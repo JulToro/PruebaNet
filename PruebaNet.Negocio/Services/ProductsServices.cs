@@ -1,4 +1,5 @@
 ﻿using PruebaNet.Negocio.Entities;
+using PruebaNet.Negocio.Interfaces;
 using PruebaNet.Negocio.Services.InterfaceServices;
 using System;
 using System.Collections.Generic;
@@ -9,14 +10,19 @@ namespace PruebaNet.Negocio.Services
 {
     public class ProductsServices : IProductsService
     {
-        IProduct _iProduct;
+        private readonly IProduct _iProduct;
         public ProductsServices(IProduct iProduct)
         {
             this._iProduct = iProduct;
         }
-        public Task<Result<IEnumerable<Product>>> Get()
+        public async Task<Result<IEnumerable<Product>>> Get()
         {
-            throw new NotImplementedException();
+            return await _iProduct.Get();
+        }
+
+        public async Task<Result<Product>> Get(int id)
+        {
+            return await _iProduct.Get(id);
         }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PruebaNet.Datos.Context;
 
-namespace PruebaNet.Datos.Migrations
+namespace PruebaNet.WebApi.Migrations
 {
     [DbContext(typeof(MyDbContext))]
     partial class MyDbContextModelSnapshot : ModelSnapshot
@@ -168,6 +168,21 @@ namespace PruebaNet.Datos.Migrations
                     b.ToTable("Person");
                 });
 
+            modelBuilder.Entity("PruebaNet.Datos.EntitiesTable.PLU", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("PLU");
+                });
+
             modelBuilder.Entity("PruebaNet.Datos.EntitiesTable.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -244,6 +259,14 @@ namespace PruebaNet.Datos.Migrations
                     b.HasOne("PruebaNet.Datos.EntitiesTable.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId");
+                });
+
+            modelBuilder.Entity("PruebaNet.Datos.EntitiesTable.PLU", b =>
+                {
+                    b.HasOne("PruebaNet.Datos.EntitiesTable.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
