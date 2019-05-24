@@ -21,11 +21,12 @@ namespace PruebaNet.Datos.Context
             new ClientMap(modelBuilder.Entity<Client>());
             new EmployeeMap(modelBuilder.Entity<Employee>());
             new InventoryMap(modelBuilder.Entity<Inventory>());
-            new OrderClientMap(modelBuilder.Entity<OrderClient>());
+            //new OrderClientMap(modelBuilder.Entity<OrderClient>());
+            new ProductMap(modelBuilder.Entity<Product>());
             new OrderDetailMap(modelBuilder.Entity<OrderDetail>());
             new OrderMap(modelBuilder.Entity<Order>());
             new PLUMap(modelBuilder.Entity<PLU>());
-            new ProductMap(modelBuilder.Entity<Product>());
+            
         }
     }
 }

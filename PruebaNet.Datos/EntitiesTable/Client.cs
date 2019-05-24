@@ -14,6 +14,6 @@ namespace PruebaNet.Datos.EntitiesTable
         public string PhoneNumber { get; set; }
         public string Addres { get; set; }
         public string City { get; set; }
-        public virtual OrderClient OrderClient { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

@@ -8,15 +8,15 @@ namespace PruebaNet.Datos.MapBD
 {
     class OrderClientMap
     {
-        public OrderClientMap(EntityTypeBuilder<OrderClient> entityBuilder)
-        {
-            entityBuilder.HasKey(t => t.Id);
-            //entityBuilder.HasOne(t => t.Client)
-            //             .WithOne(b => b.OrderClient)
-            //             .HasForeignKey<Client>(b => b.Id);
-            //entityBuilder.HasOne(t => t.Employee)
-            //             .WithOne(b => b.OrderClient)
-            //             .HasForeignKey<Employee>(b => b.Id);
-        }
+        //public OrderClientMap(EntityTypeBuilder<OrderClient> entityBuilder)
+        //{
+        //    //entityBuilder.HasKey(t => t.Id);
+        //    //entityBuilder.HasOne(t => t.Client)
+        //    //             .WithOne(b => b.OrderClient)
+        //    //             .HasForeignKey<Client>(b => b.Id);
+        //    //entityBuilder.HasOne(t => t.Employee)
+        //    //             .WithOne(b => b.OrderClient)
+        //    //             .HasForeignKey<Employee>(b => b.Id);
+        //}
     }
 }

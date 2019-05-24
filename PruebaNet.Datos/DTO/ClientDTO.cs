@@ -8,6 +8,8 @@ namespace PruebaNet.Datos.DTO
 {
     public class ClientDTO
     {
+        [JsonProperty(PropertyName = "IdCliente")]
+        public Int64 id { get; set; }
         [JsonProperty(PropertyName = "Cedula")]
         public Int64 identification { get; set; }
         [JsonProperty(PropertyName = "Nombre")]

@@ -14,6 +14,9 @@ namespace PruebaNet.Datos.MapBD
             entityBuilder.Property(t => t.Brand).IsRequired();
             entityBuilder.Property(t => t.Name).IsRequired();
             entityBuilder.Property(t => t.Price);
+            entityBuilder.HasMany(t => t.OrderDetail)
+                         .WithOne(b => b.Product);
+
         }
     }
 }

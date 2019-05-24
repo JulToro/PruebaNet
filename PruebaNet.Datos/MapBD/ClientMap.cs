@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PruebaNet.Datos.MapBD
 {
-    class ClientMap
+    public class ClientMap
     {
         public ClientMap(EntityTypeBuilder<Client> entityBuilder)
         {
@@ -17,15 +17,10 @@ namespace PruebaNet.Datos.MapBD
             entityBuilder.Property(t => t.Email);
             entityBuilder.Property(t => t.Addres);
             entityBuilder.Property(t=>t.City);
-
-            entityBuilder.HasOne(t => t.OrderClient)
-             .WithOne(b => b.Client)
-             .HasForeignKey<OrderClient>(b => b.Id);
-
-            //entityBuilder.HasOne(t => t.Person)
-            //            .WithOne(t => t.Client)
-            //            .HasForeignKey<Person>(b => b.Id);
-
+            entityBuilder.HasMany(t => t.Orders)
+                         .WithOne(b => b.Client);
+             //.HasForeignKey<Order>(b => b.Id);
+            
         }
     }
 }

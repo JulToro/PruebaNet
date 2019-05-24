@@ -23,10 +23,5 @@ namespace PruebaNet.Datos.Base
             get;
             set;
         }
-        public string IPAddress
-        {
-            get;
-            set;
-        }
     }
 }

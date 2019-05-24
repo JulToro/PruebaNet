@@ -6,6 +6,7 @@
 
     public class Client: IEntity
     {
+        public Int64 id { get; set; }
         public Int64 identification { get; }
         public string name { get; }
         public string email { get; }

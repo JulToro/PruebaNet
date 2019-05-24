@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PruebaNet.WebApi.Migrations
 {
-    public partial class MyFirstMigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,6 @@ namespace PruebaNet.WebApi.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
-                    IPAddress = table.Column<string>(nullable: true),
                     Identification = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
@@ -37,7 +36,6 @@ namespace PruebaNet.WebApi.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
-                    IPAddress = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -53,7 +51,6 @@ namespace PruebaNet.WebApi.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
-                    IPAddress = table.Column<string>(nullable: true),
                     Cantidad = table.Column<int>(nullable: false),
                     ProductId = table.Column<int>(nullable: false)
                 },
@@ -63,72 +60,32 @@ namespace PruebaNet.WebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderClient",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false),
-                    AddedDate = table.Column<DateTime>(nullable: false),
-                    ModifiedDate = table.Column<DateTime>(nullable: false),
-                    IPAddress = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderClient", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_OrderClient_Client_Id",
-                        column: x => x.Id,
-                        principalTable: "Client",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderClient_Employee_Id",
-                        column: x => x.Id,
-                        principalTable: "Employee",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Order",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
-                    IPAddress = table.Column<string>(nullable: true),
                     Comments = table.Column<string>(nullable: false),
-                    RegisterDate = table.Column<DateTime>(nullable: false)
+                    ClientId = table.Column<long>(nullable: true),
+                    EmployeeId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Order", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Order_OrderClient_Id",
-                        column: x => x.Id,
-                        principalTable: "OrderClient",
+                        name: "FK_Order_Client_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Client",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OrderDetail",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false),
-                    AddedDate = table.Column<DateTime>(nullable: false),
-                    ModifiedDate = table.Column<DateTime>(nullable: false),
-                    IPAddress = table.Column<string>(nullable: true),
-                    Commentary = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderDetail", x => x.Id);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_OrderDetail_Order_Id",
-                        column: x => x.Id,
-                        principalTable: "Order",
+                        name: "FK_Order_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employee",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -138,10 +95,12 @@ namespace PruebaNet.WebApi.Migrations
                     Id = table.Column<long>(nullable: false),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
-                    IPAddress = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: false),
                     Brand = table.Column<string>(nullable: false),
-                    Price = table.Column<double>(nullable: false)
+                    Price = table.Column<double>(nullable: false),
+                    InventoryId = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false),
+                    PLUId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -150,12 +109,6 @@ namespace PruebaNet.WebApi.Migrations
                         name: "FK_Product_Inventory_Id",
                         column: x => x.Id,
                         principalTable: "Inventory",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Product_OrderDetail_Id",
-                        column: x => x.Id,
-                        principalTable: "OrderDetail",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -167,7 +120,6 @@ namespace PruebaNet.WebApi.Migrations
                     Id = table.Column<long>(nullable: false),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
-                    IPAddress = table.Column<string>(nullable: true),
                     Name = table.Column<int>(nullable: false),
                     Tax = table.Column<int>(nullable: false),
                     ProductId = table.Column<int>(nullable: false)
@@ -184,26 +136,49 @@ namespace PruebaNet.WebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OrderDetail",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    Commentary = table.Column<string>(nullable: false),
+                    OrderId = table.Column<int>(nullable: false),
+                    OrderId1 = table.Column<long>(nullable: true),
+                    ProductId = table.Column<int>(nullable: false),
+                    ProductId1 = table.Column<long>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderDetail", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderDetail_Order_OrderId1",
+                        column: x => x.OrderId1,
+                        principalTable: "Order",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_OrderDetail_Product_ProductId1",
+                        column: x => x.ProductId1,
+                        principalTable: "Product",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PLU",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
-                    IPAddress = table.Column<string>(nullable: true),
-                    CategoryId = table.Column<int>(nullable: false),
                     NumberPLU = table.Column<int>(nullable: false),
-                    CategoryId1 = table.Column<long>(nullable: true)
+                    ProductId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PLU", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PLU_Category_CategoryId1",
-                        column: x => x.CategoryId1,
-                        principalTable: "Category",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_PLU_Product_Id",
                         column: x => x.Id,
@@ -213,39 +188,51 @@ namespace PruebaNet.WebApi.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PLU_CategoryId1",
-                table: "PLU",
-                column: "CategoryId1");
+                name: "IX_Order_ClientId",
+                table: "Order",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_EmployeeId",
+                table: "Order",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDetail_OrderId1",
+                table: "OrderDetail",
+                column: "OrderId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDetail_ProductId1",
+                table: "OrderDetail",
+                column: "ProductId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PLU");
-
-            migrationBuilder.DropTable(
                 name: "Category");
-
-            migrationBuilder.DropTable(
-                name: "Product");
-
-            migrationBuilder.DropTable(
-                name: "Inventory");
 
             migrationBuilder.DropTable(
                 name: "OrderDetail");
 
             migrationBuilder.DropTable(
+                name: "PLU");
+
+            migrationBuilder.DropTable(
                 name: "Order");
 
             migrationBuilder.DropTable(
-                name: "OrderClient");
+                name: "Product");
 
             migrationBuilder.DropTable(
                 name: "Client");
 
             migrationBuilder.DropTable(
                 name: "Employee");
+
+            migrationBuilder.DropTable(
+                name: "Inventory");
         }
     }
 }
