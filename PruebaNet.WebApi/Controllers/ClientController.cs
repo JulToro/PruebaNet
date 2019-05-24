@@ -29,7 +29,7 @@ namespace PruebaNet.WebApi.Controllers
             this._iServiceClients = iServiceClients;
         }
         /// <summary>
-        /// Metodo encargado de obtener todas las ordenes que se han creado.
+        /// Metodo encargado de obtener todas los clientes que se han creado.
         /// </summary>
         /// <returns></returns>
         // GET: api/clients

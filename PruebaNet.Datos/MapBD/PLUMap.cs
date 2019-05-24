@@ -14,7 +14,7 @@ namespace PruebaNet.Datos.MapBD
             entityBuilder.Property(t => t.NumberPLU).IsRequired();
             entityBuilder.HasOne(t => t.Product)
                          .WithOne(t => t.PLU)
-                         .HasForeignKey<PLU>(b => b.Id);
+                         .HasForeignKey<Product>(b => b.PLUId);
 
         }
     }

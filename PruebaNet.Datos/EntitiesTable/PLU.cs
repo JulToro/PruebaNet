@@ -8,7 +8,6 @@ namespace PruebaNet.Datos.EntitiesTable
     public class PLU: BaseEntity
     {
         public int NumberPLU { get; set; }
-        public int ProductId { get; set; }
         public virtual Product Product { get; set; }
 
 

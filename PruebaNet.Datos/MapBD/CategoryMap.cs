@@ -15,7 +15,7 @@ namespace PruebaNet.Datos.MapBD
             entityBuilder.Property(t => t.Tax).IsRequired();
             entityBuilder.HasOne(t=> t.Product)
                         .WithOne(t=>t.Category)
-                        .HasForeignKey<Category>(b => b.Id);
+                        .HasForeignKey<Product>(b => b.CategoryId);
 
         }
     }

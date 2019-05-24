@@ -76,6 +76,7 @@ namespace PruebaNet.WebApi.Controllers
                 if (orderReturn.IsSuccess)
                 {
                     OrderDTO order = CastOrdertoOrderDTO(orderReturn);
+
                     result.IsSuccess = true;
                     result.Response = order;
                 }
@@ -112,6 +113,7 @@ namespace PruebaNet.WebApi.Controllers
                 foreach (var item in order.products)
                 {
                     Product product = new Product(item.idProduct, item.nameProduct, item.value, item.tax, item.PLU);
+                    product.commentary = item.commentary;
                     listProducts.Add(product);
                 }
 

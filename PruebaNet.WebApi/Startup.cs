@@ -59,6 +59,10 @@ namespace PruebaNet.WebApi
 
             //Repositories
             services.AddTransient<IClient, ClientsRepository>();
+            services.AddTransient<IOrder, OrderServiceRepository>();
+            services.AddTransient<IEmployee, EmployeeRepository>();
+            services.AddTransient<IProduct, ProductRepository>();
+            services.AddTransient<IOrder, OrderServiceRepository>();
 
             //services.AddDbContext<MyDbContext>(connection=> connection.UseSqlServer(connectionString), b => b.MigrationsAssembly("Project.Api"));
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));

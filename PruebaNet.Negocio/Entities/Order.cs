@@ -4,7 +4,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    public class Order : IOrder
+    public class Order : IEntity
     {
         public Int64 clientId { get; }
         public Int64 employeeId { get; }
@@ -36,10 +36,6 @@
             }
             return true;
         }
-
-        public double Get()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

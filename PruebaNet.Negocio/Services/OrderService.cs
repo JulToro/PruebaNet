@@ -1,15 +1,22 @@
 ﻿namespace PruebaNet.Negocio.Services
 {
     using PruebaNet.Negocio.Entities;
+    using PruebaNet.Negocio.Interfaces;
     using PruebaNet.Negocio.Services.InterfaceServices;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class OrderService : IOrderService
     {
-        public Task<Result<bool>> Create(Order order)
+        private readonly IOrder _iOrder;
+
+        public OrderService(IOrder iOrder)
         {
-            throw new System.NotImplementedException();
+            this._iOrder = iOrder;
+        }
+        public async Task<Result<bool>> Create(Order order)
+        {
+            return await _iOrder.Create(order);
         }
 
         public Task<Result<bool>> Delete(Order order)

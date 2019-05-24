@@ -9,7 +9,7 @@
         public double value { get; }
         public int? PLU { get; }
         public int tax { get; }
-        public string commentary { get; }
+        public string commentary { get; set; }
         public Product(Int64 idProduct, string nameProduct, double value, int tax, int? PLU)
         {
             this.idProduct = idProduct;

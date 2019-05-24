@@ -28,7 +28,7 @@ namespace PruebaNet.WebApi.Controllers
             this._iEmployeesService = iEmployeesService;
         }
         /// <summary>
-        /// Metodo encargado de obtener todas las ordenes que se han creado.
+        /// Metodo encargado de obtener todas los empleados que se han creado.
         /// </summary>
         /// <returns></returns>
         // GET: api/employees
@@ -54,7 +54,7 @@ namespace PruebaNet.WebApi.Controllers
             return Ok(result);
         }
         /// <summary>
-        /// Metodo encargado de obtener información de un cliente especifico.
+        /// Metodo encargado de obtener información de un empleado especifico.
         /// </summary>
         /// <returns></returns>
         /// <param name="id">Id del Empleado</param>

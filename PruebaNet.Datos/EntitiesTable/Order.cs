@@ -8,6 +8,7 @@ namespace PruebaNet.Datos.EntitiesTable
     public class Order: BaseEntity
     {
         public string Comments { get; set; }
+        public double Total { get; set; }
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }
         public virtual Client Client { get; set; }
         public virtual Employee Employee { get; set; }

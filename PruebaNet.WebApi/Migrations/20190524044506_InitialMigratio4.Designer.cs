@@ -10,8 +10,8 @@ using PruebaNet.Datos.Context;
 namespace PruebaNet.WebApi.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20190524023611_InitialMigration2")]
-    partial class InitialMigration2
+    [Migration("20190524044506_InitialMigratio4")]
+    partial class InitialMigratio4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,15 +23,16 @@ namespace PruebaNet.WebApi.Migrations
 
             modelBuilder.Entity("PruebaNet.Datos.EntitiesTable.Category", b =>
                 {
-                    b.Property<long>("Id");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("AddedDate");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<int>("Name");
-
-                    b.Property<int>("ProductId");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<int>("Tax");
 
@@ -121,6 +122,8 @@ namespace PruebaNet.WebApi.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
+                    b.Property<double>("Total");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
@@ -158,15 +161,15 @@ namespace PruebaNet.WebApi.Migrations
 
             modelBuilder.Entity("PruebaNet.Datos.EntitiesTable.PLU", b =>
                 {
-                    b.Property<long>("Id");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("AddedDate");
 
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<int>("NumberPLU");
-
-                    b.Property<int>("ProductId");
 
                     b.HasKey("Id");
 
@@ -182,30 +185,26 @@ namespace PruebaNet.WebApi.Migrations
                     b.Property<string>("Brand")
                         .IsRequired();
 
-                    b.Property<int>("CategoryId");
-
-                    b.Property<int>("InventoryId");
+                    b.Property<long>("CategoryId");
 
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<int>("PLUId");
+                    b.Property<long>("PLUId");
 
                     b.Property<double>("Price");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product");
-                });
+                    b.HasIndex("CategoryId")
+                        .IsUnique();
 
-            modelBuilder.Entity("PruebaNet.Datos.EntitiesTable.Category", b =>
-                {
-                    b.HasOne("PruebaNet.Datos.EntitiesTable.Product", "Product")
-                        .WithOne("Category")
-                        .HasForeignKey("PruebaNet.Datos.EntitiesTable.Category", "Id")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasIndex("PLUId")
+                        .IsUnique();
+
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("PruebaNet.Datos.EntitiesTable.Order", b =>
@@ -230,19 +229,21 @@ namespace PruebaNet.WebApi.Migrations
                         .HasForeignKey("ProductId");
                 });
 
-            modelBuilder.Entity("PruebaNet.Datos.EntitiesTable.PLU", b =>
-                {
-                    b.HasOne("PruebaNet.Datos.EntitiesTable.Product", "Product")
-                        .WithOne("PLU")
-                        .HasForeignKey("PruebaNet.Datos.EntitiesTable.PLU", "Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("PruebaNet.Datos.EntitiesTable.Product", b =>
                 {
+                    b.HasOne("PruebaNet.Datos.EntitiesTable.Category", "Category")
+                        .WithOne("Product")
+                        .HasForeignKey("PruebaNet.Datos.EntitiesTable.Product", "CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("PruebaNet.Datos.EntitiesTable.Inventory", "Inventory")
                         .WithOne("Product")
                         .HasForeignKey("PruebaNet.Datos.EntitiesTable.Product", "Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("PruebaNet.Datos.EntitiesTable.PLU", "PLU")
+                        .WithOne("Product")
+                        .HasForeignKey("PruebaNet.Datos.EntitiesTable.Product", "PLUId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

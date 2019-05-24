@@ -74,7 +74,9 @@ namespace PruebaNet.Datos.Repositories
 
                 foreach (var item in result)
                 {
-                    listClient.Add(new Client(item.Identification, item.Name, item.Email, item.PhoneNumber, item.Addres, item.City));
+                    Client clientGet = new Client(item.Identification, item.Name, item.Email, item.PhoneNumber, item.Addres, item.City);
+                    clientGet.id = item.Id;
+                    listClient.Add(clientGet);
                 }
 
                 resp.IsSuccess = true;
